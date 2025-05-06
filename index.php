@@ -40,7 +40,7 @@ function brush()
         }
         echo "刷分中 ";
         for ($i = 31180; $i < 31210; $i++) {
-            http_get(str_replace('*', $i, 'https://hostloc.com/space-uid-*.html'));
+            http_get(str_replace('*', $i, 'https://ssdforum.org/space-uid-*.html'));
             echo $i == 31209 ? "+ 完成\n" : "+";
             sleep(rand(5, 10));
         }
@@ -84,7 +84,7 @@ function login($username, $password)
         'handlekey' => 'ls'
     );
     $cc_cookie = get_cc_cookie();
-    $response = http_post('https://hostloc.com/member.php?mod=logging&action=login&loginsubmit=yes&infloat=yes&lssubmit=yes&inajax=1', $loginData, $cc_cookie);
+    $response = http_post('https://ssdforum.org/member.php?mod=logging&action=login&loginsubmit=yes&infloat=yes&lssubmit=yes&inajax=1', $loginData, $cc_cookie);
     // 获取Cookie
     preg_match_all('/set-cookie: (.*?);/i', $response, $matches);
     if (count($cc_cookie) > 0) {
@@ -128,7 +128,7 @@ function get_cc_cookie()
 function check_cc()
 {
     $data = [];
-    $html = file_get_contents('https://hostloc.com/forum.php');
+    $html = file_get_contents('https://ssdforum.org/forum.php');
 
     preg_match_all("/toNumbers\(\"(.*?)\"\)/", $html, $matches);
     if (isset($matches[1]) && count($matches[1]) === 3) {
@@ -152,7 +152,7 @@ function check_cc()
 function get_info()
 {
     $data = [];
-    $html = http_get('https://hostloc.com/home.php?mod=spacecp&ac=credit');
+    $html = http_get('https://ssdforum.org/home.php?mod=spacecp&ac=credit');
     preg_match('/<a.*?title="访问我的空间">(.*)<\/a>/', $html, $matches);
     if (isset($matches[1])) {
         $data['username'] = $matches[1];
@@ -206,7 +206,7 @@ function http_get($url)
         curl_setopt($ch, CURLOPT_COOKIE, $cookie);
     }
     curl_setopt($ch, CURLOPT_USERAGENT, 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36');
-    curl_setopt($ch, CURLOPT_REFERER, 'https://hostloc.com/');
+    curl_setopt($ch, CURLOPT_REFERER, 'https://ssdforum.org/');
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
@@ -232,7 +232,7 @@ function http_post($url, $data, $cookie = [])
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
     curl_setopt($ch, CURLOPT_COOKIE, http_build_query($cookie, '', '; '));
     curl_setopt($ch, CURLOPT_USERAGENT, 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36');
-    curl_setopt($ch, CURLOPT_REFERER, 'https://hostloc.com/');
+    curl_setopt($ch, CURLOPT_REFERER, 'https://ssdforum.org/');
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
